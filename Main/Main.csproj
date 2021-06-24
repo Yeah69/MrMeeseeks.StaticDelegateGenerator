@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
     <Configurations>Debug;Release;Wpf;All</Configurations>
     <AssemblyName>MrMeeseeks.StaticDelegateGenerator</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
@@ -12,7 +13,6 @@
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
     <Description>-/-</Description>
-    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup>

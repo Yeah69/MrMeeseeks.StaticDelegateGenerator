@@ -39,7 +39,7 @@ namespace MrMeeseeks.StaticDelegateGenerator
 
             if(context
                 .Compilation
-                .GetTypeByMetadataName(typeof(StaticTypeToDelegateAttribute).FullName) is not { } attributeType)
+                .GetTypeByMetadataName(typeof(StaticTypeToDelegateAttribute).FullName ?? "") is not { } attributeType)
                 return;
 
 

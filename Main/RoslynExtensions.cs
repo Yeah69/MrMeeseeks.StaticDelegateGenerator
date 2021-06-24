@@ -4,15 +4,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
+// Picked from https://github.com/YairHalberstadt/stronginject Thank you!
 namespace StrongInject.Generator
 {
     internal static class RoslynExtensions
     {
-        public static INamedTypeSymbol? GetType(this Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName);
+        public static INamedTypeSymbol? GetType(this Compilation compilation, Type type) => compilation.GetTypeByMetadataName(type.FullName ?? "");
         public static INamedTypeSymbol? GetTypeOrReport(this Compilation compilation, Type type, Action<Diagnostic> reportDiagnostic)
         {
             var typeSymbol = compilation.GetType(type);
@@ -196,17 +196,15 @@ namespace StrongInject.Generator
             private AttributeComparer() { }
 
             public static readonly AttributeComparer Instance = new();
-            public int Compare(AttributeData x, AttributeData y)
+            public int Compare(AttributeData? x, AttributeData? y)
             {
-                Debug.Assert(
-                    x.AttributeClass is { ContainingNamespace: { Name: "StrongInject" } }
-                    && y.AttributeClass is { ContainingNamespace: { Name: "StrongInject" } });
-
-                var compareClass = string.CompareOrdinal(x.AttributeClass?.Name, y.AttributeClass?.Name);
+                var compareClass = string.CompareOrdinal(x?.AttributeClass?.Name, y?.AttributeClass?.Name);
                 if (compareClass != 0)
                     return compareClass;
 
-                return CompareArrays(x.ConstructorArguments, y.ConstructorArguments);
+                return CompareArrays(
+                    x?.ConstructorArguments ?? ImmutableArray<TypedConstant>.Empty,
+                    y?.ConstructorArguments ?? ImmutableArray<TypedConstant>.Empty);
             }
 
             private static int CompareArrays(ImmutableArray<TypedConstant> arrayX, ImmutableArray<TypedConstant> arrayY)
