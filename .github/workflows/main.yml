@@ -1,0 +1,35 @@
+name: OnVersionTag
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  windows:
+    
+    strategy:
+      matrix:
+        configuration: [ Release ]
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: MrMeeseeks.StaticDelegateGenerator.sln                        # Replace with your solution name, i.e. MyWpfApp.sln.
+      
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.301
+    - run: set DOTNET_CLI_TELEMETRY_OPTOUT=1
+    - name: Install dependencies
+      run: dotnet restore .\MrMeeseeks.StaticDelegateGenerator.sln
+    - name: Build
+      run: dotnet build .\MrMeeseeks.StaticDelegateGenerator.sln --configuration Release --no-restore
+    - name: Publish to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      with:
+        PROJECT_FILE_PATH: Main/Main.csproj
+        VERSION_FILE_PATH: Directory.Build.props
+        TAG_COMMIT: false
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
