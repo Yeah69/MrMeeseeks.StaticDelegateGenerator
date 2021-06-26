@@ -3,7 +3,6 @@
   <PropertyGroup>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <Version>$(MinVerVersion)</Version>
-    <PackageVersion>$(MinVerVersion)</PackageVersion>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
@@ -40,9 +39,5 @@
     <Product>MrMeeseeks.StaticDelegateGenerator</Product>
     <PackageProjectUrl>https://github.com/Yeah69/MrMeeseeks.StaticDelegateGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yeah69/MrMeeseeks.StaticDelegateGenerator</RepositoryUrl>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 </Project>

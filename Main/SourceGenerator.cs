@@ -62,7 +62,7 @@ namespace MrMeeseeks.StaticDelegateGenerator
                     // Invalid code, ignore
                     continue;
                 }
-                if (!CheckValidType(attributeData, typeConstant, out var type))
+                if (!CheckValidType(typeConstant, out var type))
                 {
                     continue;
                 }
@@ -193,7 +193,7 @@ namespace MrMeeseeks.StaticDelegateGenerator
             }
         }
 
-        private bool CheckValidType(AttributeData registerAttribute, TypedConstant typedConstant, out INamedTypeSymbol type)
+        private bool CheckValidType(TypedConstant typedConstant, out INamedTypeSymbol type)
         {
             type = (typedConstant.Value as INamedTypeSymbol)!;
             if (typedConstant.Value is null)
