@@ -2,6 +2,5 @@
 using MrMeeseeks.StaticDelegateGenerator;
 using SampleUsingNuget;
 
-[assembly: StaticTypeToDelegate(typeof(DateTime))]
-
-[assembly: StaticTypeToDelegate(typeof(UngenericSampleClass))]
+[assembly: StaticDelegate(typeof(DateTime))]
+[assembly: StaticDelegate(typeof(UngenericSampleClass))]
