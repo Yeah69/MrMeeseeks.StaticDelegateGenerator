@@ -3,14 +3,11 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>MrMeeseeks.StaticDelegateGenerator</AssemblyName>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <RootNamespace>MrMeeseeks.StaticDelegateGenerator</RootNamespace>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild> <!-- Generates a package at build -->
   </PropertyGroup>
   <PropertyGroup>
-    <PackageId>$(AssemblyName)</PackageId>
-    <Description>-/-</Description>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -9,6 +9,7 @@
     <WarningsAsErrors>nullable</WarningsAsErrors>
     <Authors>Yeah69</Authors>
     <PackageIcon>Yeah69Logo_256.png</PackageIcon>
+    <AssemblyName>$(RootNamespace)</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,9 @@
     <PackageVersion>$(MinVerVersion)</PackageVersion>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageId>$(AssemblyName)</PackageId>
+    <Product>$(AssemblyName)</Product>
+    <Description>For further information and updates please visit the projects page.</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +40,6 @@
   <PropertyGroup>
     <PackageTags>MrMeeseeks Generator Static Delegator</PackageTags>
     <PackageReleaseNotes>-/-</PackageReleaseNotes>
-    <Product>MrMeeseeks.StaticDelegateGenerator</Product>
     <PackageProjectUrl>https://github.com/Yeah69/MrMeeseeks.StaticDelegateGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Yeah69/MrMeeseeks.StaticDelegateGenerator</RepositoryUrl>
   </PropertyGroup>

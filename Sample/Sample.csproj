@@ -4,8 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
 
-    <AssemblyName>MrMeeseeks.StaticDelegate.Sample</AssemblyName>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <RootNamespace>MrMeeseeks.StaticDelegate.Sample</RootNamespace>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>

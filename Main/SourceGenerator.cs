@@ -5,33 +5,16 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using StrongInject.Generator;
 
 namespace MrMeeseeks.StaticDelegateGenerator
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [Generator]
     public class SourceGenerator : ISourceGenerator
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
         public void Initialize(GeneratorInitializationContext context)
         {
-            /*//
-            if (!Debugger.IsAttached)
-            {
-                Debugger.Launch();
-            }//*/
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
         public void Execute(GeneratorExecutionContext context)
         {
             Console.WriteLine("Hello");
@@ -39,7 +22,7 @@ namespace MrMeeseeks.StaticDelegateGenerator
 
             if(context
                 .Compilation
-                .GetTypeByMetadataName(typeof(StaticTypeToDelegateAttribute).FullName ?? "") is not { } attributeType)
+                .GetTypeByMetadataName(typeof(StaticDelegateAttribute).FullName ?? "") is not { } attributeType)
                 return;
 
 

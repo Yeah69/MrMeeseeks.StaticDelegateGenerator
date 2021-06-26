@@ -3,6 +3,8 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
+
+        <RootNamespace>MrMeeseeks.StaticDelegate.SampleUsingNuget</RootNamespace>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
