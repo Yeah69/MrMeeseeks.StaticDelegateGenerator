@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MrMeeseeks.StaticDelegateGenerator" Version="69.0.0-alpha.2" />
-      <PackageReference Include="MrMeeseeks.StaticDelegateGenerator" Version="69.0.0-alpha.2" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
+      <PackageReference Include="MrMeeseeks.StaticDelegateGenerator" Version="69.0.0-alpha.4" />
     </ItemGroup>
 </Project>
