@@ -53,7 +53,10 @@ namespace MrMeeseeks.StaticDelegateGenerator
                 var symbols = type
                     .GetMembers()
                     .Where(s => s is { IsStatic: true, DeclaredAccessibility: Accessibility.Public } and 
-                        (IPropertySymbol or IMethodSymbol { IsExtensionMethod: false, IsInitOnly: false, MethodKind: MethodKind.Ordinary }))
+                        (
+                        IPropertySymbol or 
+                        IMethodSymbol { IsExtensionMethod: false, IsInitOnly: false, MethodKind: MethodKind.Ordinary }) or
+                        IFieldSymbol { AssociatedSymbol: null })
                     .ToArray();
 
                 if (symbols.Any())
@@ -65,13 +68,13 @@ namespace MrMeeseeks.StaticDelegateGenerator
 
                     interfaceBuilder
                         .Append("namespace ").Append(type.ContainingNamespace.FullName()).AppendLine()
-                        .Append("{").AppendLine()
+                        .Append('{').AppendLine()
                         .Append("    internal interface I").Append(typeName).Append(staticDelegateSuffix).AppendLine()
                         .Append("    {").AppendLine();
 
                     implementationBuilder
                         .Append("namespace ").Append(type.ContainingNamespace.FullName()).AppendLine()
-                        .Append("{").AppendLine()
+                        .Append('{').AppendLine()
                         .Append("    internal class ").Append(typeName).Append(staticDelegateSuffix).Append(" : I").Append(typeName).Append(staticDelegateSuffix).AppendLine()
                         .Append("    {").AppendLine();
 
@@ -90,6 +93,18 @@ namespace MrMeeseeks.StaticDelegateGenerator
                                     $"            {propertyTypeFullName} {propertyName} {{{(propertySymbol.GetMethod is { } ? " get;" : "")}{(propertySymbol.SetMethod is { } ? " set;" : "")} }}");
                                 implementationBuilder.AppendLine(
                                     $"            public {propertyTypeFullName} {propertyName} {{{(propertySymbol.GetMethod is { } ? $" get => {typeFullName}.{propertyName};" : "")}{(propertySymbol.SetMethod is { } ? $" set => {typeFullName}.{propertyName} = value;" : "")} }}");
+                                break;
+                            }
+                            case SymbolKind.Field:
+                            {
+                                var fieldSymbol = (IFieldSymbol)symbol;
+                                var fieldName = fieldSymbol.Name;
+                                var fieldTypeFullName = fieldSymbol.Type.FullName();
+                                var hasSetter = !fieldSymbol.IsConst && !fieldSymbol.IsReadOnly;
+                                interfaceBuilder.AppendLine(
+                                    $"            {fieldTypeFullName} {fieldName} {{ get;{(hasSetter ? " set;" : "")} }}");
+                                implementationBuilder.AppendLine(
+                                    $"            public {fieldTypeFullName} {fieldName} {{ get => {typeFullName}.{fieldName};{(hasSetter ? $" set => {typeFullName}.{fieldName} = value;" : "")} }}");
                                 break;
                             }
                             case SymbolKind.Method:
@@ -136,9 +151,9 @@ namespace MrMeeseeks.StaticDelegateGenerator
                                     .Append($"            {returnTypeFullName} {methodName}{genericTypes}({parameterDeclaration});").AppendLine();
                                 implementationBuilder
                                     .Append($"            public {returnTypeFullName} {methodName}{genericTypes}({parameterDeclaration})").AppendLine()
-                                    .Append($"            {{").AppendLine()
+                                    .Append( "            {{").AppendLine()
                                     .Append($"                {returnInCall}{typeFullName}.{methodName}({parameterCall});").AppendLine()
-                                    .Append($"            }}").AppendLine();
+                                    .Append( "            }}").AppendLine();
                                     break;
                             }
 
@@ -147,11 +162,11 @@ namespace MrMeeseeks.StaticDelegateGenerator
 
                     interfaceBuilder
                         .Append("    }").AppendLine()
-                        .Append("}").AppendLine();
+                        .Append('}').AppendLine();
 
                     implementationBuilder
                         .Append("    }").AppendLine()
-                        .Append("}").AppendLine();
+                        .Append('}').AppendLine();
 
                     var interfaceSource = CSharpSyntaxTree
                         .ParseText(SourceText.From(interfaceBuilder.ToString(), Encoding.UTF8))
