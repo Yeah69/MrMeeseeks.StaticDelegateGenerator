@@ -1,6 +1,6 @@
 ﻿using System;
+using MrMeeseeks.StaticDelegate.SampleUsingNuget;
 using MrMeeseeks.StaticDelegateGenerator;
-using SampleUsingNuget;
 
 [assembly: StaticDelegate(typeof(DateTime))]
 [assembly: StaticDelegate(typeof(UngenericSampleClass))]

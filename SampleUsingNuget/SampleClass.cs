@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleUsingNuget
+namespace MrMeeseeks.StaticDelegate.SampleUsingNuget
 {
     class UngenericSampleClass
     {
